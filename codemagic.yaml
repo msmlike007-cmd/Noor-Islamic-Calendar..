@@ -1,0 +1,17 @@
+workflows:
+  noor-android-debug:
+    name: Noor Islamic Calendar Android APK
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Generate a clean Android platform folder
+        script: |
+          rm -rf android
+          flutter create --platforms=android --org com.masum .
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build installable Android APK
+        script: flutter build apk --debug
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
